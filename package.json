@@ -1,0 +1,29 @@
+{
+  "name": "toybox",
+  "version": "1.0.0",
+  "description": "A fun playtime for all the family",
+  "main": "mapReduceFilter.js",
+  "scripts": {
+    "start": "gulp default"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "express.js": "^1.0.0",
+    "flickrapi": "^0.6.0",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-sass": "^3.2.1",
+    "jquery": "^3.3.1",
+    "lodash": "^4.17.5",
+    "mongodb": "^2.2.33",
+    "reload": "^2.2.2"
+  },
+  "devDependencies": {
+    "browser-sync": "^1.3.3",
+    "gulp": "^3.8.7",
+    "gulp-nodemon": "^1.0.4",
+    "path": "^0.12.7"
+  }
+}

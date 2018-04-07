@@ -1,0 +1,10 @@
+<div>
+    <input type="text" placeholder="Location..." ng-click"clear()" ng-model="setLoc">
+    <button ng-click="getWeather()">Get weather</button>
+    <h1 class="f2">{{weather.name}}</h1>
+    <h1 class="f3">weather: {{weather.weather[0].main}}</h1>
+    <h1 class="f3">{{weather.weather[0].description}}</h1>
+    <h1 class="f3">wind speed: {{weather.wind.speed}}</h1>
+    <h1 class="f3">Humidity: {{weather.main.humidity}}</h1>
+    <h1 class="f3">Temp: {{temp}}</h1>
+</div>

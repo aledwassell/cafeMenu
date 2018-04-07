@@ -1,0 +1,29 @@
+{
+  "name": "toybox",
+  "description": "A fun playtime for all the family",
+  "main": "mapReduceFilter.js",
+  "authors": [
+    "Aled's Pro!"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/aledwassell/toybox",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "tachyons": "^4.9.1",
+    "angular": "^1.6.9",
+    "angular-resource": "^1.6.9",
+    "Font-Awesome": "fontawesome#^5.0.8",
+    "angularjs-slider": "^6.5.0",
+    "angular-chart.js": "^1.1.1",
+    "Chart.js": "2.4.0",
+    "quagga": "^0.12.1",
+    "angularjs-gauge": "^2.2.0",
+    "angular-route": "^1.6.9"
+  }
+}
