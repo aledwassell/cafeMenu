@@ -4,7 +4,6 @@ const gulp = require('gulp');
 const browserSync = require('browser-sync');
 const nodemon = require('gulp-nodemon');
 const sass = require('gulp-sass');
-
 // we'd need a slight delay to reload browsers
 // connected to browser-sync after restarting nodemon
 var BROWSER_SYNC_RELOAD_DELAY = 500;
@@ -58,8 +57,11 @@ gulp.task('js',  function () {
     //.pipe(gulp.dest('...'));
 });
 
-gulp.task('css', function () {
-    return gulp.src('public/css/*.css')
+gulp.task('cssify', function () {
+    console.log('css')
+    return gulp.src('sass/*.sass')
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest('public/css'))
         .pipe(browserSync.reload({ stream: true }));
 })
 
@@ -70,7 +72,7 @@ gulp.task('bs-reload', function () {
 gulp.task('default', ['browser-sync'], function () {
     gulp.watch('app/routes/*.js',   ['js', browserSync.reload]);
     gulp.watch('public/js/*.js',   ['js', browserSync.reload]);
-    gulp.watch('public/css/*.css',  ['css']);
+    gulp.watch('sass/*.sass',  ['cssify']);
     gulp.watch('public/*.html', ['bs-reload']);
     gulp.watch('public/views/*', ['bs-reload']);
 });

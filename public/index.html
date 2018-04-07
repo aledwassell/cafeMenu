@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>Promises</title>
-    <link rel="stylesheet" href="css/style.sass">
+    <link rel="stylesheet" href="css/style.css">
     <script type="text/javascript" src="components/angular/angular.js"></script>
     <script type="text/javascript" src="components/angular-resource/angular-resource.js"></script>
     <script type="text/javascript" src="components/angular-route/angular-route.min.js"></script>
@@ -22,12 +22,14 @@
 </head>
 <body>
 
-<div style="display: grid;" ng-app="toybox_app">
+<div class="main-container" ng-app="toybox_app">
     <div>
         <nav ng-controller="navigationCtrl" class="pa3 pa4-ns">
-            <a class="link dim black b f3 f-headline-ns tc db mb3 mb4-ns" href="#" title="Home">app name</a>
+            <div></div>
             <div class="tc pb3">
-                <a ng-repeat="link in links" class="link dim gray f6 f5-ns dib mr3" href="{{link.url}}" title="{{link.name}}">{{link.name}}</a>
+                <a ng-repeat="link in links" class="link dim gray f6 f5-ns dib mr3" href="{{link.url}}" title="{{link.name}}">
+
+                </a>
             </div>
         </nav>
     </div>
