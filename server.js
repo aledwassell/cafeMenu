@@ -18,5 +18,5 @@ MongoClient.connect(db.url, (e, database) => {
     require('./app/routes')(app, database);
     app.listen(port, () => {
         console.log(`Server running at: ${port}/`);
-    });
+    })
 })

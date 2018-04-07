@@ -1,8 +1,8 @@
 {
-  "name": "toybox",
+  "name": "cafeMenu",
   "version": "1.0.0",
-  "description": "A fun playtime for all the family",
-  "main": "mapReduceFilter.js",
+  "description": "Cafe menu app",
+  "main": "public/js/angApp.js",
   "scripts": {
     "start": "gulp default"
   },
