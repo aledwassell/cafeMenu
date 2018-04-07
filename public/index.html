@@ -25,10 +25,10 @@
 <div class="main-container" ng-app="toybox_app">
     <div>
         <nav ng-controller="navigationCtrl" class="pa3 pa4-ns">
-            <div></div>
+            <div>Header</div>
             <div class="tc pb3">
                 <a ng-repeat="link in links" class="link dim gray f6 f5-ns dib mr3" href="{{link.url}}" title="{{link.name}}">
-
+                    {{link.name}}
                 </a>
             </div>
         </nav>
