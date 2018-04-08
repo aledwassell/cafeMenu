@@ -20,8 +20,10 @@
         }])
         .controller('navigationCtrl', ['$scope', function ($scope) {
             $scope.links = [
-                {url: '/', name: 'Home'},
-                {url: '#!/photos', name: 'Photos'}
+                {url: '/', name: 'Breakfast'},
+                {url: '#!/photos', name: 'Lunch'},
+                {url: '#!/photos', name: 'Dinner'},
+                {url: '#!/photos', name: 'Blog'},
             ]
         }])
         .controller('photos', ['$scope', 'flickrPhotosProvider', function ($scope, flickrPhotosProvider) {
@@ -35,8 +37,10 @@
                     $scope.photosUrls.push(
                         {
                             id: photo.id,
-                            url: `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`,
-                            title: photo.title
+                            url: `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_n.jpg`,
+                            title: photo.title,
+                            description: photo.description,
+                            author: photo.author
                         }
                     )
                 });

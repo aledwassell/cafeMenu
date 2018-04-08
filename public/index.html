@@ -9,31 +9,28 @@
     <script type="text/javascript" src="components/angular-route/angular-route.min.js"></script>
     <link rel="stylesheet" href="components/tachyons/css/tachyons.css">
     <link rel="stylesheet" href="components/Font-Awesome/web-fonts-with-css/css/fontawesome-all.css">
-
-    <link rel="stylesheet" type="text/css" href="components/angularjs-slider/dist/rzslider.css"/>
-    <script src="components/angularjs-slider/dist/rzslider.min.js"></script>
-
-    <script type="text/javascript" src="components/chart.js/dist/Chart.min.js"></script>
-    <script type="text/javascript" src="components/angular-chart.js/dist/angular-chart.min.js"></script>
-    <script type="text/javascript" src="components/angularjs-gauge/src/angularjs-gauge.js"></script>
-
-    <script type="text/javascript" src="components/quagga/dist/quagga.min.js"></script>
-
 </head>
 <body>
 
-<div class="main-container" ng-app="toybox_app">
-    <div>
-        <nav ng-controller="navigationCtrl" class="pa3 pa4-ns">
-            <div>Header</div>
-            <div class="tc pb3">
-                <a ng-repeat="link in links" class="link dim gray f6 f5-ns dib mr3" href="{{link.url}}" title="{{link.name}}">
-                    {{link.name}}
-                </a>
-            </div>
-        </nav>
-    </div>
-    <div ng-view></div>
+<div class="wrapper-container" ng-app="toybox_app">
+    <header>
+        <a class="b f3 f-headline-ns tc db link mb3 helvetica" href="#" title="Home">app name</a>
+    </header>
+    <div class="test"></div>
+    <div class="test"></div>
+    <div class="test"></div>
+    <div class="test"></div>
+    <a class="test"></a>
+    <a class="test"></a>
+    <a class="test"></a>
+    <a class="test"></a>
+    <nav ng-controller="navigationCtrl" class="pa3 pa4-ns">
+        <a ng-repeat="link in links" class="linkA pa3 center link dim gray f6 f5-ns dib mr3" href="{{link.url}}" title="{{link.name}}">
+            {{link.name}}
+        </a>
+    </nav>
+    <main ng-view class="main-content"></main>
+    <footer></footer>
 </div>
 
 <script type="text/javascript" src="js/angApp.js"></script>

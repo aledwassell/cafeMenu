@@ -7,7 +7,8 @@ const Flickr = require('flickrapi'),
     flickrOptions = {
         api_key: apiKey.apiKey,
         secret: apiKey.secret,
-        user_id: '157408260@N04'
+        // user_id: '157408260@N04'
+        user_id: '11644213@N04'
     };
 
 
@@ -23,6 +24,12 @@ module.exports = (app) => {
                     res.send(`There was an error ${err}`)
                     return false;
                 }
+
+                result.photos.photo.map((img) => {
+                    img.description = 'A photo description soon to be populated with actual data.'
+                    img.author = 'Aled Wassell'
+                })
+
                 res.send(result);
             });
         });

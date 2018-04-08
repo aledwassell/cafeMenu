@@ -1,9 +1,36 @@
 body
   margin: 0px
 
-.main-container
+.wrapper-container
   display: grid
-  background-color: pink
-  height: 100vh
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr
+
+header
+  grid-column-start: 1
+  grid-column-end: 9
+
+nav
+  grid-column: 1 / 9
+  justify-content: space-between !important
+  a
+    background-color: pink
+
+main
+  grid-column-start: 1
+  grid-column-end: 9
+
+.test
+  background-color: orangered
+  height: 25px
+  border: 1px solid greenyellow
+
+.main-content
+  grid-column-start: 2
+  grid-column-end: 9
+  .img
+    border: 2px solid green
+    justify-self: stretch
+  .title
+    border: 2px dashed pink
 
 
