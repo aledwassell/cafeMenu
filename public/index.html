@@ -16,17 +16,8 @@
     <header>
         <a class="b f3 f-headline-ns tc db link mb3 helvetica" href="#" title="Home">app name</a>
     </header>
-
-    <div class="test"></div>
-    <div class="test"></div>
-    <div class="test"></div>
-    <div class="test"></div>
-    <a class="test"></a>
-    <a class="test"></a>
-    <a class="test"></a>
-    <a class="test"></a>
     <nav ng-controller="navigationCtrl" class="pa3 pa4-ns">
-        <a ng-repeat="link in links" class="linkA pa3 center link dim gray f6 f5-ns dib mr3" href="{{link.url}}" title="{{link.name}}">
+        <a ng-repeat="link in links" class="linkA pa3 center link dim gray f6 f5-ns dib mr3" ng-class="link.class" href="{{link.url}}" title="{{link.name}}">
             {{link.name}}
         </a>
     </nav>

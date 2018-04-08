@@ -20,10 +20,10 @@
         }])
         .controller('navigationCtrl', ['$scope', function ($scope) {
             $scope.links = [
-                {url: '/', name: 'Breakfast'},
-                {url: '#!/photos', name: 'Lunch'},
-                {url: '#!/photos', name: 'Dinner'},
-                {url: '#!/photos', name: 'Blog'},
+                {url: '/', name: 'Breakfast', class:'breakfast'},
+                {url: '#!/photos', name: 'Lunch', class:'lunch'},
+                {url: '#!/photos', name: 'Dinner', class:'dinner'},
+                {url: '#!/photos', name: 'Blog', class:'blog'},
             ]
         }])
         .controller('photos', ['$scope', 'flickrPhotosProvider', function ($scope, flickrPhotosProvider) {

@@ -10,10 +10,16 @@ header {
   grid-column-end: 9; }
 
 nav {
-  grid-column: 1 / 9;
-  justify-content: space-between !important; }
-  nav a {
-    background-color: pink; }
+  grid-column: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr; }
+  nav .breakfast {
+    grid-column: 1/2; }
+  nav .lunch {
+    grid-column: 2/3; }
+  nav .dinner {
+    grid-column: 3/4; }
+  nav .blog {
+    grid-column: 4/5; }
 
 main {
   grid-column-start: 1;

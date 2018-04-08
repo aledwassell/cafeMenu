@@ -10,10 +10,16 @@ header
   grid-column-end: 9
 
 nav
-  grid-column: 1 / 9
-  justify-content: space-between !important
-  a
-    background-color: pink
+  grid-column: grid
+  grid-template-columns: 1fr 1fr 1fr 1fr
+  .breakfast
+    grid-column: 1/2
+  .lunch
+    grid-column: 2/3
+  .dinner
+    grid-column: 3/4
+  .blog
+    grid-column: 4/5
 
 main
   grid-column-start: 1
