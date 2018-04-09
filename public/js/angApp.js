@@ -25,6 +25,7 @@
                 {url: '#!/photos', name: 'Dinner', class:'dinner'},
                 {url: '#!/photos', name: 'Blog', class:'blog'},
             ]
+
         }])
         .controller('photos', ['$scope', 'flickrPhotosProvider', function ($scope, flickrPhotosProvider) {
             $scope.service = flickrPhotosProvider;
