@@ -4,15 +4,14 @@ body {
 .wrapper-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 150px 1fr;
+  grid-template-rows: auto 1fr;
   grid-template-areas: "header header" "main main" "footer footer"; }
 
 header {
   grid-column: 1/5;
   grid-row-start: header-start;
   grid-row-end: header-end;
-  z-index: 1;
-  align-items: center; }
+  z-index: 1; }
 
 .nav {
   grid-column: 1/5;
@@ -22,7 +21,7 @@ header {
   height: 100vh; }
   .nav div {
     display: grid;
-    grid-template-rows: 150px 1fr;
+    grid-template-rows: 250px 1fr;
     text-align: center;
     flex-grow: 1;
     -webkit-transition: flex-grow 2s;
