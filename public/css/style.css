@@ -4,14 +4,17 @@ body {
 .wrapper-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: 250px 1fr;
   grid-template-areas: "header header" "main main" "footer footer"; }
 
-header {
+.header {
   grid-column: 1/5;
   grid-row-start: header-start;
   grid-row-end: header-end;
-  z-index: 1; }
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
 
 .nav {
   grid-column: 1/5;
