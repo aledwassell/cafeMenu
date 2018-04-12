@@ -37,11 +37,11 @@ body {
       grid-row: 2/3; }
     .nav div:hover {
       -webkit-flex-basis: 35vw;
-      flex-basis: 35vw; }
+      flex-basis: 30vw; }
   .nav .breakfast {
     background-color: #1fadce; }
   .nav .lunch {
-    background-color: #ff57a7; }
+    background-color: #ffb23a; }
   .nav .dinner {
     background-color: #3ebc8e; }
   .nav .blog {
