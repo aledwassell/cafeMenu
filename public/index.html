@@ -17,10 +17,12 @@
         <div class="b f3 f-headline-ns db tc link helvetica">Café Natty</div>
     </header>
     <nav ng-controller="navigationCtrl" class="nav">
-        <div ng-repeat="link in links" class="link gray f6 f5-ns dib {{link.class}}" href="{{link.url}}" title="{{link.name}}">
-            <h2>
-                {{link.name}}
-            </h2>
+        <div ng-repeat="link in links" class="link gray f6 f5-ns dib {{link.class}}">
+            <a class="link" href="{{link.url}}" title="{{link.name}}">
+                <h2>
+                    {{link.name}}
+                </h2>
+            </a>
         </div>
     </nav>
     <main ng-view class="main-content"></main>

@@ -20,10 +20,10 @@
         }])
         .controller('navigationCtrl', ['$scope', function ($scope) {
             $scope.links = [
-                {url: '/', name: 'Breakfast', class:'breakfast'},
-                {url: '#!/photos', name: 'Lunch', class:'lunch'},
-                {url: '#!/photos', name: 'Dinner', class:'dinner'},
-                {url: '#!/photos', name: 'Blog', class:'blog'},
+                {url: '#!/breakfast', name: 'Breakfast', class:'breakfast'},
+                {url: '#!/lunch', name: 'Lunch', class:'lunch'},
+                {url: '#!/dinner', name: 'Dinner', class:'dinner'},
+                {url: '#!/blog', name: 'Blog', class:'blog'},
             ]
 
         }])
