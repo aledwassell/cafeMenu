@@ -36,8 +36,8 @@ body {
       color: #fff;
       grid-row: 2/3; }
     .nav div:hover {
-      -webkit-flex-basis: 50vw;
-      flex-basis: 50vw; }
+      -webkit-flex-basis: 35vw;
+      flex-basis: 35vw; }
   .nav .breakfast {
     background-color: #1fadce; }
   .nav .lunch {
