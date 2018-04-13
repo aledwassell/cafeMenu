@@ -21,7 +21,6 @@
 
             this.panelConstructor = function () {
                 panel.title = '';
-
             }
 
 
