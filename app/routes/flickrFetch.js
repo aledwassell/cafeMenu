@@ -14,6 +14,7 @@ const Flickr = require('flickrapi'),
 
 module.exports = (app) => {
     const getPhoto = (req, res) => {
+        console.log(req)
         Flickr.tokenOnly(flickrOptions, function(error, flickr) {
             flickr.photos.search({
                 user_id: flickr.options.user_id,

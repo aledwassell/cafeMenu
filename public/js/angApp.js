@@ -20,14 +20,14 @@
         }])
         .controller('navigationCtrl', ['$scope', function ($scope) {
             $scope.links = [
-                {url: '#!/breakfast', name: 'Breakfast', class:'breakfast'},
+                {url: '#!/photos', name: 'Breakfast', class:'breakfast'},
                 {url: '#!/lunch', name: 'Lunch', class:'lunch'},
                 {url: '#!/dinner', name: 'Dinner', class:'dinner'},
                 {url: '#!/blog', name: 'Blog', class:'blog'},
             ]
 
         }])
-        .controller('photos', ['$scope', 'flickrPhotosProvider', function ($scope, flickrPhotosProvider) {
+        .controller('mainRepresentationCtrl', ['$scope', 'flickrPhotosProvider', function ($scope, flickrPhotosProvider) {
             $scope.service = flickrPhotosProvider;
             $scope.photosUrls = [];
             let rawData = $scope.service.get({}, () => {
@@ -46,5 +46,6 @@
                     )
                 });
             })
+            console.log(rawData)
         }])
 })();
