@@ -13,8 +13,19 @@
                 })
         })
         .factory('flickrPhotosProvider', ($resource) => {
-            return $resource('/photos')
+            return $resource('/')
         })
+        .service('photoPanelConstructor', ['flickrPhotosProvider', function (flickrPhotosProvider) {
+            let provider = flickrPhotosProvider,
+                panel = {};
+
+            this.panelConstructor = function () {
+                panel.title = '';
+
+            }
+
+
+        }])
         .controller('main', ['$scope', function ($scope) {
 
         }])

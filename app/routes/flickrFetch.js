@@ -11,7 +11,6 @@ const Flickr = require('flickrapi'),
         user_id: '11644213@N04'
     };
 
-
 module.exports = (app) => {
     const getPhoto = (req, res) => {
         console.log(req)
@@ -30,13 +29,12 @@ module.exports = (app) => {
                     img.description = 'A photo description soon to be populated with actual data.'
                     img.author = 'Aled Wassell'
                 })
-
                 res.send(result);
             });
         });
     }
 
-    app.get('/photos', jsonParser, (req, res) => {
+    app.get('/', jsonParser, (req, res) => {
         getPhoto(req, res)
     })
 }
