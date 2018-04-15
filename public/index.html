@@ -14,7 +14,10 @@
 
 <div class="wrapper-container" ng-app="toybox_app">
     <header class="header">
-        <div class="b f3 f-headline-ns db tc link helvetica">Café Natty</div>
+        <div></div>
+        <div class="b f3 f-headline-ns db tc link helvetica">Nat's
+            <div style="display: inline; background-color: #000000; border-radius: 50%; color: #fff; padding: 10px 15px; font-size: 38px;">が</div>
+            eats</div>
     </header>
     <nav ng-controller="navigationCtrl" class="nav">
         <div ng-repeat="link in links" class="link gray f6 f5-ns dib {{link.class}}" ng-controller="mainRepresentationCtrl">
@@ -25,6 +28,7 @@
                 <main ng-view class="main-content"></main>
             </a>
         </div>
+        <base href="/">
     </nav>
 
     <footer></footer>

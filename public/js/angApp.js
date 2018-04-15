@@ -1,49 +1,51 @@
 (function () {
     'use strict';
     var toybox_app = angular.module('toybox_app', ['ngResource', 'ngRoute'])
-        .config(function ($routeProvider) {
+        .config(function ($routeProvider, $locationProvider) {
             $routeProvider
                 .when('/', {
-                    controller: "main",
-                    templateUrl: "views/main.htm"
+                    redirectTo: '/breakfast'
                 })
-                .when("/photos", {
-                    controller: "photos",
-                    templateUrl: "views/photos.htm"
+                .when('/breakfast', {
+                    controller: "breakfastCtrl",
+                    templateUrl: "views/breakfast.htm"
                 })
+                .when('/lunch', {
+                    controller: "lunchCtrl",
+                    templateUrl: "views/lunch.htm"
+                })
+                .when('/dinner', {
+                    controller: "dinnerCtrl",
+                    templateUrl: "views/dinner.htm"
+                })
+                .when('/blog', {
+                    controller: "blogCtrl",
+                    templateUrl: "views/blog.htm"
+                })
+
+            $locationProvider.html5Mode(true).hashPrefix('!');
         })
         .factory('flickrPhotosProvider', ($resource) => {
             return $resource('/')
         })
+        .service('breakfastPhotos', ['flickrPhotosProvider', function (flickrPhotosProvider) {
+            const provider = flickrPhotosProvider
+            this.photos = provider.get()
+        }])
         .service('photoPanelConstructor', ['flickrPhotosProvider', function (flickrPhotosProvider) {
             let provider = flickrPhotosProvider,
                 panel = {};
 
-            this.panelConstructor = function () {
-                panel.title = '';
+            function PanelConstructor(pasedInfo) {
+                this.title = pasedInfo.title;
+                this.backgroundImage = pasedInfo.backgroundImage;
             }
 
 
         }])
-        .controller('main', ['$scope', function ($scope) {
 
-        }])
-        .controller('navigationCtrl', ['$scope', function ($scope) {
-            $scope.links = [
-                {url: '#!/photos', name: 'Breakfast', class:'breakfast'},
-                {url: '#!/lunch', name: 'Lunch', class:'lunch'},
-                {url: '#!/dinner', name: 'Dinner', class:'dinner'},
-                {url: '#!/blog', name: 'Blog', class:'blog'},
-            ]
-
-        }])
-        .controller('mainRepresentationCtrl', ['$scope', 'flickrPhotosProvider', function ($scope, flickrPhotosProvider) {
-            $scope.service = flickrPhotosProvider;
-            $scope.photosUrls = [];
-            let rawData = $scope.service.get({}, () => {
-                $scope.$watchCollection('rawData.photos.photo', () => {
-                    console.log(rawData.photos.photo);
-                });
+        .service('URLbuilder', ['flickrPhotosProvider', function (flickrPhotosProvider) {
+            let rawData = flickrPhotosProvider.get({}, () => {
                 angular.forEach(rawData.photos.photo, (photo) => {
                     $scope.photosUrls.push(
                         {
@@ -56,6 +58,32 @@
                     )
                 });
             })
-            console.log(rawData)
+        }])
+
+        .controller('navigationCtrl', ['$scope', function ($scope) {
+            $scope.links = [
+                {url: 'breakfast', name: 'Breakfast', class:'breakfast'},
+                {url: 'lunch', name: 'Lunch', class:'lunch'},
+                {url: 'dinner', name: 'Dinner', class:'dinner'},
+                {url: 'blog', name: 'Blog', class:'blog'},
+            ]
+
+        }])
+        .controller('mainRepresentationCtrl', ['$scope', 'flickrPhotosProvider', function ($scope, flickrPhotosProvider) {
+            $scope.service = flickrPhotosProvider;
+            $scope.photosUrls = [];
+            $scope.test = 'hello';
+        }])
+        .controller('breakfastCtrl', ['$scope', function ($scope) {
+            $scope.test = 'breakfast';
+        }])
+        .controller('lunchCtrl', ['$scope', function ($scope) {
+            $scope.test = 'lunch';
+        }])
+        .controller('dinnerCtrl', ['$scope', function ($scope) {
+            $scope.test = 'dinner';
+        }])
+        .controller('blogCtrl', ['$scope', function ($scope) {
+            $scope.test = 'blog';
         }])
 })();
