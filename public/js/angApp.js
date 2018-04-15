@@ -26,28 +26,18 @@
             $locationProvider.html5Mode(true).hashPrefix('!');
         })
         .factory('flickrPhotosProvider', ($resource) => {
-            return $resource('/')
+            return $resource('/photos')
         })
         .service('breakfastPhotos', ['flickrPhotosProvider', function (flickrPhotosProvider) {
             const provider = flickrPhotosProvider
             this.photos = provider.get()
         }])
-        .service('photoPanelConstructor', ['flickrPhotosProvider', function (flickrPhotosProvider) {
-            let provider = flickrPhotosProvider,
-                panel = {};
-
-            function PanelConstructor(pasedInfo) {
-                this.title = pasedInfo.title;
-                this.backgroundImage = pasedInfo.backgroundImage;
-            }
-
-
-        }])
 
         .service('URLbuilder', ['flickrPhotosProvider', function (flickrPhotosProvider) {
-            let rawData = flickrPhotosProvider.get({}, () => {
-                angular.forEach(rawData.photos.photo, (photo) => {
-                    $scope.photosUrls.push(
+            this.photoURLs = [];
+            this.getRawResponse = flickrPhotosProvider.get({}, () => {
+                angular.forEach(this.getRawResponse.photos.photo, (photo) => {
+                    this.photoURLs.push(
                         {
                             id: photo.id,
                             url: `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_n.jpg`,
@@ -58,9 +48,13 @@
                     )
                 });
             })
+            this.getUrls = function () {
+                return this.photoURLs;
+            }
         }])
 
-        .controller('navigationCtrl', ['$scope', function ($scope) {
+        .controller('navigationCtrl', ['$scope', 'URLbuilder', function ($scope, URLbuilder) {
+            $scope.background = URLbuilder.getUrls();
             $scope.links = [
                 {url: 'breakfast', name: 'Breakfast', class:'breakfast'},
                 {url: 'lunch', name: 'Lunch', class:'lunch'},
@@ -74,11 +68,12 @@
             $scope.photosUrls = [];
             $scope.test = 'hello';
         }])
-        .controller('breakfastCtrl', ['$scope', function ($scope) {
-            $scope.test = 'breakfast';
+        .controller('breakfastCtrl', ['$scope', 'URLbuilder', function ($scope, URLbuilder) {
+
         }])
-        .controller('lunchCtrl', ['$scope', function ($scope) {
+        .controller('lunchCtrl', ['$scope', 'URLbuilder', function ($scope, URLbuilder) {
             $scope.test = 'lunch';
+            $scope.photosUrls = URLbuilder.getUrls();
         }])
         .controller('dinnerCtrl', ['$scope', function ($scope) {
             $scope.test = 'dinner';

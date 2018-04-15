@@ -33,7 +33,7 @@ module.exports = (app) => {
         });
     }
 
-    app.get('/', jsonParser, (req, res) => {
+    app.get('/photos', jsonParser, (req, res) => {
         getPhoto(req, res)
     })
 }
