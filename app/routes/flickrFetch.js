@@ -23,13 +23,15 @@ module.exports = (app) => {
                     res.send(`There was an error ${err}`)
                     return false;
                 }
+                console.log(result)
 
                 result.photos.photo.map((img) => {
                     img.description = 'A photo description soon to be populated with actual data.'
                     img.author = 'Aled Wassell'
                 })
                 res.send(result);
-            });
+            })
+            then()
         });
     }
 
