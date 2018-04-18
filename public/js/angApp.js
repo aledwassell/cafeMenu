@@ -8,7 +8,12 @@
                 })
                 .when('/breakfast', {
                     controller: "breakfastCtrl",
-                    templateUrl: "views/breakfast.htm"
+                    templateUrl: "views/breakfast.htm",
+                    resolve: {
+                        images: function (URLbuilder) {
+                            return URLbuilder.getUrls();
+                        }
+                    }
                 })
                 .when('/lunch', {
                     controller: "lunchCtrl",
@@ -23,7 +28,7 @@
                     templateUrl: "views/blog.htm"
                 })
 
-            $locationProvider.html5Mode(true).hashPrefix('!');
+            $locationProvider.html5Mode(true);
         })
         .factory('flickrPhotosProvider', ($resource) => {
             return $resource('/photos')
@@ -32,7 +37,6 @@
             const provider = flickrPhotosProvider
             this.photos = provider.get()
         }])
-
         .service('URLbuilder', ['flickrPhotosProvider', function (flickrPhotosProvider) {
             this.photoURLs = [];
             this.getRawResponse = flickrPhotosProvider.get({}, () => {
@@ -40,7 +44,7 @@
                     this.photoURLs.push(
                         {
                             id: photo.id,
-                            url: `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_n.jpg`,
+                            url: `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_m.jpg`,
                             title: photo.title,
                             description: photo.description,
                             author: photo.author
@@ -54,13 +58,15 @@
         }])
 
         .controller('navigationCtrl', ['$scope', 'URLbuilder', function ($scope, URLbuilder) {
-            $scope.background = URLbuilder.getUrls();
+            $scope.images = URLbuilder.getUrls();
             $scope.links = [
-                {url: 'breakfast', name: 'Breakfast', class:'breakfast'},
+                {url: 'breakfast', name: 'Breakfast', class:'breakfast', backgroundImage: "https://farm5.staticflickr.com/4649/39644383782_a927073153_m.jpg"},
                 {url: 'lunch', name: 'Lunch', class:'lunch'},
                 {url: 'dinner', name: 'Dinner', class:'dinner'},
                 {url: 'blog', name: 'Blog', class:'blog'},
             ]
+
+            console.log($scope.images);
 
         }])
         .controller('mainRepresentationCtrl', ['$scope', 'flickrPhotosProvider', function ($scope, flickrPhotosProvider) {
@@ -69,11 +75,12 @@
             $scope.test = 'hello';
         }])
         .controller('breakfastCtrl', ['$scope', 'URLbuilder', function ($scope, URLbuilder) {
-
+            $scope.photosUrls = URLbuilder.getUrls();
         }])
         .controller('lunchCtrl', ['$scope', 'URLbuilder', function ($scope, URLbuilder) {
             $scope.test = 'lunch';
             $scope.photosUrls = URLbuilder.getUrls();
+            console.log($scope.photosUrls)
         }])
         .controller('dinnerCtrl', ['$scope', function ($scope) {
             $scope.test = 'dinner';
