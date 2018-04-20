@@ -31,10 +31,15 @@
             $locationProvider.html5Mode(true);
         })
         .factory('flickrPhotosProvider', ($resource) => {
-            return $resource('/photos')
+            return $resource('/api/photos', {id:@id}, {
+                get:{
+                    method: 'GET',
+                    id: id
+                }
+            })
         })
         .factory('flickrSetsProvider', ($resource) => {
-            return $resource('/sets')
+            return $resource('/api/sets')
         })
         .service('breakfastPhotos', ['flickrPhotosProvider', function (flickrPhotosProvider) {
             const provider = flickrPhotosProvider
@@ -62,7 +67,7 @@
 
         .service('setOrganiser', ['flickrSetsProvider', function (flickrSetsProvider) {
             this.photoURLs = [];
-            this.getRawResponse = flickrSetsProvider.get({}, () => {
+            this.getRawResponse = flickrSetsProvider.get({id:'72157663434459275'}, () => {
                 this.photoURLs = this.getRawResponse;
                 console.log(this.getRawResponse);
             })
