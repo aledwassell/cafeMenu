@@ -33,6 +33,9 @@
         .factory('flickrPhotosProvider', ($resource) => {
             return $resource('/photos')
         })
+        .factory('flickrSetsProvider', ($resource) => {
+            return $resource('/sets')
+        })
         .service('breakfastPhotos', ['flickrPhotosProvider', function (flickrPhotosProvider) {
             const provider = flickrPhotosProvider
             this.photos = provider.get()
@@ -51,6 +54,17 @@
                         }
                     )
                 });
+            })
+            this.getUrls = function () {
+                return this.photoURLs;
+            }
+        }])
+
+        .service('setOrganiser', ['flickrSetsProvider', function (flickrSetsProvider) {
+            this.photoURLs = [];
+            this.getRawResponse = flickrSetsProvider.get({}, () => {
+                this.photoURLs = this.getRawResponse;
+                console.log(this.getRawResponse);
             })
             this.getUrls = function () {
                 return this.photoURLs;
@@ -82,7 +96,9 @@
             $scope.photosUrls = URLbuilder.getUrls();
             console.log($scope.photosUrls)
         }])
-        .controller('dinnerCtrl', ['$scope', function ($scope) {
+        .controller('dinnerCtrl', ['$scope', 'setOrganiser', function ($scope, setOrganiser) {
+            $scope.service = setOrganiser;
+            $scope.service.getUrls();
             $scope.test = 'dinner';
         }])
         .controller('blogCtrl', ['$scope', function ($scope) {

@@ -31,11 +31,37 @@ module.exports = (app) => {
                 })
                 res.send(result);
             })
-            then()
         });
     }
 
     app.get('/photos', jsonParser, (req, res) => {
         getPhoto(req, res)
+    })
+
+    const getPhotoSets = (req, res) => {
+        Flickr.tokenOnly(flickrOptions, function(error, flickr) {
+            flickr.photosets.getPhotos({
+                photoset_id: '72157663434459275',
+                user_id: flickr.options.user_id,
+                page: 1,
+                per_page: 20
+            }, function(err, result) {
+                if(err){
+                    res.send(`There was an error ${err}`)
+                    return false;
+                }
+                console.log(result)
+                //
+                // result.photos.photo.map((img) => {
+                //     img.description = 'A photo description soon to be populated with actual data.'
+                //     img.author = 'Aled Wassell'
+                // })
+                res.send(result);
+            })
+        });
+    }
+
+    app.get('/sets', jsonParser, (req, res) => {
+        getPhotoSets(req, res)
     })
 }
