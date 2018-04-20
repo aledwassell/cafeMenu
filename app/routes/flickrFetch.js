@@ -11,7 +11,7 @@ const Flickr = require('flickrapi'),
         user_id: '11644213@N04'
     };
 
-module.exports = (app) => {
+module.exports = (router) => {
     const getPhoto = (req, res) => {
         Flickr.tokenOnly(flickrOptions, function(error, flickr) {
             flickr.photos.search({
@@ -34,7 +34,7 @@ module.exports = (app) => {
         });
     }
 
-    app.get('/photos', jsonParser, (req, res) => {
+    router.get('/photos', jsonParser, (req, res) => {
         getPhoto(req, res)
     })
 
@@ -60,8 +60,7 @@ module.exports = (app) => {
             })
         });
     }
-
-    app.get('/sets', jsonParser, (req, res) => {
+    router.get('/sets', jsonParser, (req, res) => {
         getPhotoSets(req, res)
     })
 }

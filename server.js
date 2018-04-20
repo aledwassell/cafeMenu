@@ -7,15 +7,20 @@ const db = require('./config/db');
 
 const app = express();
 
-const urlencodedParser = bodyParser.urlencoded({extended: true})
+const urlencodedParser = bodyParser.urlencoded({extended: true});
 const jsonParser = bodyParser.json();
+
+
+const router = express.Router();
+
+app.use('/api', router);
 
 // app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 MongoClient.connect(db.url, (e, database) => {
     if(e) return console.log('there was an error: ', e)
-    require('./app/routes')(app, database);
+    require('./app/routes')(router, database);
     app.listen(port, () => {
         console.log(`Server running at: ${port}/`);
     })
