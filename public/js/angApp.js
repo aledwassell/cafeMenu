@@ -4,16 +4,11 @@
         .config(function ($routeProvider, $locationProvider) {
             $routeProvider
                 .when('/', {
-                    redirectTo: '/breakfast'
+                    redirectTo: '/'
                 })
                 .when('/breakfast', {
                     controller: "breakfastCtrl",
-                    templateUrl: "views/breakfast.htm",
-                    resolve: {
-                        images: function (URLbuilder) {
-                            return URLbuilder.getUrls();
-                        }
-                    }
+                    templateUrl: "views/breakfast.htm"
                 })
                 .when('/lunch', {
                     controller: "lunchCtrl",
@@ -31,15 +26,16 @@
             $locationProvider.html5Mode(true);
         })
         .factory('flickrPhotosProvider', ($resource) => {
-            return $resource('/api/photos', {id:@id}, {
-                get:{
-                    method: 'GET',
-                    id: id
-                }
-            })
+            return $resource('/api/photos')
         })
         .factory('flickrSetsProvider', ($resource) => {
-            return $resource('/api/sets')
+            return $resource('/api/sets', {}, {
+                get:{
+                    method: 'GET',
+                    isTypedArray: false,
+                    id: '@id'
+                }
+            })
         })
         .service('breakfastPhotos', ['flickrPhotosProvider', function (flickrPhotosProvider) {
             const provider = flickrPhotosProvider
@@ -66,47 +62,64 @@
         }])
 
         .service('setOrganiser', ['flickrSetsProvider', function (flickrSetsProvider) {
-            this.photoURLs = [];
-            this.getRawResponse = flickrSetsProvider.get({id:'72157663434459275'}, () => {
-                this.photoURLs = this.getRawResponse;
-                console.log(this.getRawResponse);
+            this.setIds = [
+                {
+                    name: 'breakfast',
+                    id: ''
+                },
+                {
+                    name: 'lunch',
+                    id: ''
+                },
+                {
+                    name: 'dinner',
+                    id: ''
+                }
+            ];
+            this.getRawResponse = flickrSetsProvider.get({}, () => {
             })
-            this.getUrls = function () {
-                return this.photoURLs;
-            }
         }])
 
         .controller('navigationCtrl', ['$scope', 'URLbuilder', function ($scope, URLbuilder) {
             $scope.images = URLbuilder.getUrls();
             $scope.links = [
-                {url: 'breakfast', name: 'Breakfast', class:'breakfast', backgroundImage: "https://farm5.staticflickr.com/4649/39644383782_a927073153_m.jpg"},
-                {url: 'lunch', name: 'Lunch', class:'lunch'},
-                {url: 'dinner', name: 'Dinner', class:'dinner'},
-                {url: 'blog', name: 'Blog', class:'blog'},
-            ]
-
-            console.log($scope.images);
-
+                {url: 'breakfast', name: 'Breakfast', class:'breakfast', ctrl: 'breakfastCtrl'},
+                {url: 'lunch', name: 'Lunch', class:'lunch', ctrl: 'lunchCtrl'},
+                {url: 'dinner', name: 'Dinner', class:'dinner', ctrl: 'dinnerCtrl'},
+                {url: 'blog', name: 'Blog', class:'blog', ctrl: 'blogCtrl'}
+            ];
         }])
-        .controller('mainRepresentationCtrl', ['$scope', 'flickrPhotosProvider', function ($scope, flickrPhotosProvider) {
-            $scope.service = flickrPhotosProvider;
-            $scope.photosUrls = [];
-            $scope.test = 'hello';
-        }])
+
         .controller('breakfastCtrl', ['$scope', 'URLbuilder', function ($scope, URLbuilder) {
-            $scope.photosUrls = URLbuilder.getUrls();
+            $scope.active = false;
+            $scope.getPhotos = function () {
+                $scope.photosUrls = URLbuilder.getUrls();
+                $scope.active = !$scope.active;
+                console.log($scope.active);
+            }
         }])
         .controller('lunchCtrl', ['$scope', 'URLbuilder', function ($scope, URLbuilder) {
-            $scope.test = 'lunch';
-            $scope.photosUrls = URLbuilder.getUrls();
-            console.log($scope.photosUrls)
+            $scope.active = false;
+            $scope.getPhotos = function () {
+                $scope.photosUrls = URLbuilder.getUrls();
+                $scope.active = !$scope.active;
+                console.log($scope.active);
+            }
         }])
-        .controller('dinnerCtrl', ['$scope', 'setOrganiser', function ($scope, setOrganiser) {
-            $scope.service = setOrganiser;
-            $scope.service.getUrls();
-            $scope.test = 'dinner';
+        .controller('dinnerCtrl', ['$scope', 'URLbuilder', function ($scope, URLbuilder) {
+            $scope.active = false;
+            $scope.getPhotos = function () {
+                $scope.photosUrls = URLbuilder.getUrls();
+                $scope.active = !$scope.active;
+                console.log($scope.active);
+            }
         }])
         .controller('blogCtrl', ['$scope', function ($scope) {
-            $scope.test = 'blog';
+            $scope.active = false;
+            $scope.getPhotos = function () {
+                $scope.photosUrls = URLbuilder.getUrls();
+                $scope.active = !$scope.active;
+                console.log($scope.active);
+            }
         }])
 })();

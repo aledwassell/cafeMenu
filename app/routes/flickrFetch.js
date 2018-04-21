@@ -23,8 +23,6 @@ module.exports = (router) => {
                     res.send(`There was an error ${err}`)
                     return false;
                 }
-                console.log(result)
-
                 result.photos.photo.map((img) => {
                     img.description = 'A photo description soon to be populated with actual data.'
                     img.author = 'Aled Wassell'
@@ -39,12 +37,8 @@ module.exports = (router) => {
     })
     const getPhotoSets = (req, res) => {
         Flickr.tokenOnly(flickrOptions, function(error, flickr) {
-            console.log(req.params)
-            console.log(req.body)
-            console.log(req)
             flickr.photosets.getPhotos({
-                photoset_id: '72157663434459275',
-                // photoset_id: req.params.id,
+                photoset_id: req.params.id,
                 user_id: flickr.options.user_id,
                 page: 1,
                 per_page: 20
@@ -53,12 +47,6 @@ module.exports = (router) => {
                     res.send(`There was an error ${err}`)
                     return false;
                 }
-                console.log(result)
-                //
-                // result.photos.photo.map((img) => {
-                //     img.description = 'A photo description soon to be populated with actual data.'
-                //     img.author = 'Aled Wassell'
-                // })
                 res.send(result);
             })
         });
