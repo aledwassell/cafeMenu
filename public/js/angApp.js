@@ -37,10 +37,6 @@
                 }
             })
         })
-        .service('breakfastPhotos', ['flickrPhotosProvider', function (flickrPhotosProvider) {
-            const provider = flickrPhotosProvider
-            this.photos = provider.get()
-        }])
         .service('URLbuilder', ['flickrPhotosProvider', function (flickrPhotosProvider) {
             this.photoURLs = [];
             this.getRawResponse = flickrPhotosProvider.get({}, () => {
@@ -62,21 +58,47 @@
         }])
 
         .service('setOrganiser', ['flickrSetsProvider', function (flickrSetsProvider) {
+            let photoURLs = [];
             this.setIds = [
                 {
                     name: 'breakfast',
-                    id: ''
+                    id: '72157663434459275'
                 },
                 {
                     name: 'lunch',
-                    id: ''
+                    id: '72157662802940420'
                 },
                 {
                     name: 'dinner',
-                    id: ''
+                    id: '72157641632780075'
                 }
             ];
-            this.getRawResponse = flickrSetsProvider.get({}, () => {
+            this.getSetId = function(setName){
+                return this.setIds.filter((set) => {
+                    if(set.name === setName){
+                        return set;
+                    } else {
+                        return null;
+                    }
+                })
+            };
+
+            this.getRawResponse = flickrSetsProvider.get({})
+                .$promise.then(function(data) {
+                    console.log(data)
+                    angular.forEach(data.photoset.photo, (photo) => {
+                        photoURLs.push(
+                            {
+                                id: photo.id,
+                                url: `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_m.jpg`,
+                                title: photo.title,
+                                description: photo.description,
+                                author: photo.author
+                            }
+                        )
+                    })
+            }).then(() => {
+                console.log(photoURLs);
             })
         }])
 
@@ -90,36 +112,20 @@
             ];
         }])
 
-        .controller('breakfastCtrl', ['$scope', 'URLbuilder', function ($scope, URLbuilder) {
-            $scope.active = false;
-            $scope.getPhotos = function () {
-                $scope.photosUrls = URLbuilder.getUrls();
-                $scope.active = !$scope.active;
-                console.log($scope.active);
-            }
+        .controller('breakfastCtrl', ['$scope', 'URLbuilder', 'setOrganiser', function ($scope, URLbuilder, setOrganiser) {
+            $scope.setConfig = setOrganiser.getSetId('breakfast');
+            $scope.photosUrls = URLbuilder.getUrls();
+
         }])
-        .controller('lunchCtrl', ['$scope', 'URLbuilder', function ($scope, URLbuilder) {
-            $scope.active = false;
-            $scope.getPhotos = function () {
-                $scope.photosUrls = URLbuilder.getUrls();
-                $scope.active = !$scope.active;
-                console.log($scope.active);
-            }
+        .controller('lunchCtrl', ['$scope', 'URLbuilder', 'setOrganiser', function ($scope, URLbuilder, setOrganiser) {
+            $scope.setConfig = setOrganiser.getSetId('lunch');
+            $scope.photosUrls = URLbuilder.getUrls();
         }])
-        .controller('dinnerCtrl', ['$scope', 'URLbuilder', function ($scope, URLbuilder) {
-            $scope.active = false;
-            $scope.getPhotos = function () {
-                $scope.photosUrls = URLbuilder.getUrls();
-                $scope.active = !$scope.active;
-                console.log($scope.active);
-            }
+        .controller('dinnerCtrl', ['$scope', 'URLbuilder', 'setOrganiser', function ($scope, URLbuilder, setOrganiser) {
+            $scope.setConfig = setOrganiser.getSetId('dinner');
+            $scope.photosUrls = URLbuilder.getUrls();
         }])
         .controller('blogCtrl', ['$scope', function ($scope) {
-            $scope.active = false;
-            $scope.getPhotos = function () {
-                $scope.photosUrls = URLbuilder.getUrls();
-                $scope.active = !$scope.active;
-                console.log($scope.active);
-            }
+            $scope.photosUrls = URLbuilder.getUrls();
         }])
 })();
