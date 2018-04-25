@@ -36,10 +36,11 @@ module.exports = (router) => {
         getPhoto(req, res)
     })
     const getPhotoSets = (req, res) => {
+        let id = req.params.id;
+        console.log(req)
         Flickr.tokenOnly(flickrOptions, function(error, flickr) {
             flickr.photosets.getPhotos({
-                // photoset_id: req.params.id,
-                photoset_id: '72157641632780075',
+                photoset_id: id,
                 user_id: flickr.options.user_id,
                 page: 1,
                 per_page: 20

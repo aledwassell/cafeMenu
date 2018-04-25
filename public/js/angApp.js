@@ -29,11 +29,10 @@
             return $resource('/api/photos')
         })
         .factory('flickrSetsProvider', ($resource) => {
-            return $resource('/api/sets', {}, {
-                get:{
+            return $resource('/api/sets/:id', {}, {
+                getSets:{
                     method: 'GET',
-                    isTypedArray: false,
-                    id: '@id'
+                    isTypedArray: true
                 }
             })
         })
@@ -82,8 +81,8 @@
                     }
                 })
             };
-
-            this.getRawResponse = flickrSetsProvider.get({})
+            console.log(this.getSetId('breakfast'));
+            this.getRawResponse = flickrSetsProvider.get(this.getSetId('breakfast').id)
                 .$promise.then(function(data) {
                     console.log(data)
                     angular.forEach(data.photoset.photo, (photo) => {
@@ -114,7 +113,7 @@
 
         .controller('breakfastCtrl', ['$scope', 'URLbuilder', 'setOrganiser', function ($scope, URLbuilder, setOrganiser) {
             $scope.setConfig = setOrganiser.getSetId('breakfast');
-            $scope.photosUrls = URLbuilder.getUrls();
+            // $scope.photosUrls = URLbuilder.getUrls();
 
         }])
         .controller('lunchCtrl', ['$scope', 'URLbuilder', 'setOrganiser', function ($scope, URLbuilder, setOrganiser) {

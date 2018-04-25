@@ -18,10 +18,10 @@ app.use('/api', router);
 // app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'public')));
 
-MongoClient.connect(db.url, (e, database) => {
-    if(e) return console.log('there was an error: ', e)
-    require('./app/routes')(router, database);
+// MongoClient.connect(db.url, (e, database) => {
+//     if(e) return console.log('there was an error: ', e)
+    require('./app/routes')(router);
     app.listen(port, () => {
         console.log(`Server running at: ${port}/`);
     })
-})
+// })
