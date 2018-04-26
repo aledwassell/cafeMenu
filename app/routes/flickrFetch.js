@@ -44,12 +44,24 @@ module.exports = (router) => {
                 user_id: flickr.options.user_id,
                 page: 1,
                 per_page: 20
-            }, function(err, result) {
+            }, function(err, results) {
                 if(err){
                     res.send(`There was an error ${err}`)
                     return false;
                 }
-                res.send(result);
+                console.log(results)
+                // results.forEach((result) => {
+                //     photoURLs.push(
+                //         {
+                //             id: photo.id,
+                //             url: `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_m.jpg`,
+                //             title: photo.title,
+                //             description: photo.description,
+                //             author: photo.author
+                //         }
+                //     )
+                // })
+                res.send(results);
             })
         });
     }
