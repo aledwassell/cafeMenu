@@ -76,7 +76,13 @@
                 }
             ];
 
-            this.getUrls = (setName) => {
+            this.getUrls = (setName = []) => {
+                if(setName.length > 1)
+                    console.log(setName)
+                //call egt sets for the length of setname
+                else if (setName.length === 1)
+                    console.log(setName)
+                    //call egt sets once
                 return this.setIds.filter((set) => {
                     if(set.name === setName){
                         return set;
@@ -85,7 +91,7 @@
                     }
                 })
             };
-            this.getRawResponse = flickrSetsProvider.save(this.getSetId('breakfast'))
+            this.getRawResponse = flickrSetsProvider.save()
                 .$promise.then(function(data) {
                     console.log(data)
                     angular.forEach(data.photoset.photo, (photo) => {
@@ -105,7 +111,8 @@
         }])
 
         .controller('navigationCtrl', ['$scope', 'setOrganiser', function ($scope, setOrganiser) {
-            $scope.images = setOrganiser.getUrls();
+            $scope.images = setOrganiser.getUrls(['cheese']);
+            $scope.images = setOrganiser.getUrls(['cheese', 'butter', 'Ham']);
             $scope.links = [
                 {url: 'breakfast', name: 'Breakfast', class:'breakfast', ctrl: 'breakfastCtrl'},
                 {url: 'lunch', name: 'Lunch', class:'lunch', ctrl: 'lunchCtrl'},
