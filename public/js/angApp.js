@@ -28,13 +28,16 @@
         .factory('flickrPhotosProvider', ($resource) => {
             return $resource('/api/photos')
         })
-        .factory('flickrSetsProvider', ($resource) => {
-            return $resource('/api/sets/:id', {}, {
-                getSets:{
-                    method: 'GET',
-                    isTypedArray: true
+        .factory('testGet', ($resource) => {
+            return $resource('/api/hello', {}, {
+                post:{
+                    method: 'POST',
+                    isArray: true
                 }
-            })
+            });
+        })
+        .factory('flickrSetsProvider', ($resource) => {
+            return $resource('/api/sets', {}, {})
         })
         .service('URLbuilder', ['flickrPhotosProvider', function (flickrPhotosProvider) {
             this.photoURLs = [];
@@ -72,7 +75,8 @@
                     id: '72157641632780075'
                 }
             ];
-            this.getSetId = function(setName){
+
+            this.getUrls = (setName) => {
                 return this.setIds.filter((set) => {
                     if(set.name === setName){
                         return set;
@@ -81,8 +85,7 @@
                     }
                 })
             };
-            console.log(this.getSetId('breakfast'));
-            this.getRawResponse = flickrSetsProvider.get(this.getSetId('breakfast').id)
+            this.getRawResponse = flickrSetsProvider.save(this.getSetId('breakfast'))
                 .$promise.then(function(data) {
                     console.log(data)
                     angular.forEach(data.photoset.photo, (photo) => {
@@ -101,8 +104,8 @@
             })
         }])
 
-        .controller('navigationCtrl', ['$scope', 'URLbuilder', function ($scope, URLbuilder) {
-            $scope.images = URLbuilder.getUrls();
+        .controller('navigationCtrl', ['$scope', 'setOrganiser', function ($scope, setOrganiser) {
+            $scope.images = setOrganiser.getUrls();
             $scope.links = [
                 {url: 'breakfast', name: 'Breakfast', class:'breakfast', ctrl: 'breakfastCtrl'},
                 {url: 'lunch', name: 'Lunch', class:'lunch', ctrl: 'lunchCtrl'},

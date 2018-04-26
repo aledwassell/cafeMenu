@@ -36,8 +36,8 @@ module.exports = (router) => {
         getPhoto(req, res)
     })
     const getPhotoSets = (req, res) => {
-        let id = req.params.id;
-        console.log(req)
+        let id = req.body.id;
+        console.log(req.body);
         Flickr.tokenOnly(flickrOptions, function(error, flickr) {
             flickr.photosets.getPhotos({
                 photoset_id: id,
@@ -53,7 +53,7 @@ module.exports = (router) => {
             })
         });
     }
-    router.get('/sets', jsonParser, (req, res) => {
+    router.post('/sets', jsonParser, (req, res) => {
         getPhotoSets(req, res)
     })
 }
