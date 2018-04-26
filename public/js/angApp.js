@@ -77,42 +77,33 @@
             ];
 
             this.getUrls = (setName = []) => {
-                if(setName.length > 1)
+                if(setName.length === 3) {
                     console.log(setName)
-                //call egt sets for the length of setname
-                else if (setName.length === 1)
-                    console.log(setName)
-                    //call egt sets once
-                return this.setIds.filter((set) => {
-                    if(set.name === setName){
-                        return set;
-                    } else {
-                        return null;
-                    }
-                })
-            };
-            this.getRawResponse = flickrSetsProvider.save()
-                .$promise.then(function(data) {
-                    console.log(data)
-                    angular.forEach(data.photoset.photo, (photo) => {
-                        photoURLs.push(
-                            {
-                                id: photo.id,
-                                url: `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_m.jpg`,
-                                title: photo.title,
-                                description: photo.description,
-                                author: photo.author
-                            }
-                        )
+                    return setName.forEach((i) => {
+                        flickrSetsProvider.save(this.setIds.find(item => item.name === i));
                     })
-            }).then(() => {
-                console.log(photoURLs);
-            })
+                } else if (setName.length === 1) {
+                    console.log(setName)
+                    return flickrSetsProvider.save(this.setIds.find(item => item.name === setName[0]));
+                }
+            };
+            //     .$promise.then(function(data) {
+            //         console.log(data)
+            //         angular.forEach(data.photoset.photo, (photo) => {
+            //             photoURLs.push(
+            //                 {
+            //                     id: photo.id,
+            //                     url: `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_m.jpg`,
+            //                     title: photo.title,
+            //                     description: photo.description,
+            //                     author: photo.author
+            //                 }
+            //             )
+            //         })
+            // })
         }])
 
         .controller('navigationCtrl', ['$scope', 'setOrganiser', function ($scope, setOrganiser) {
-            $scope.images = setOrganiser.getUrls(['cheese']);
-            $scope.images = setOrganiser.getUrls(['cheese', 'butter', 'Ham']);
             $scope.links = [
                 {url: 'breakfast', name: 'Breakfast', class:'breakfast', ctrl: 'breakfastCtrl'},
                 {url: 'lunch', name: 'Lunch', class:'lunch', ctrl: 'lunchCtrl'},
