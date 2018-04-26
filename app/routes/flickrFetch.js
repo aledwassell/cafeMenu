@@ -49,19 +49,22 @@ module.exports = (router) => {
                     res.send(`There was an error ${err}`)
                     return false;
                 }
-                console.log(results)
-                // results.forEach((result) => {
-                //     photoURLs.push(
-                //         {
-                //             id: photo.id,
-                //             url: `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_m.jpg`,
-                //             title: photo.title,
-                //             description: photo.description,
-                //             author: photo.author
-                //         }
-                //     )
-                // })
-                res.send(results);
+                console.log(results.photoset.photo)
+                let responseData = {};
+
+                responseData.id = results.photoset.id;
+                responseData.title = results.photoset.title;
+                responseData.author = results.photoset.ownername;
+                responseData.photosUrls = [];
+                results.photoset.photo.map((photo) => {
+                    responseData.photosUrls.push(
+                        {
+                            title: photo.title,
+                            url: `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_m.jpg`
+                        }
+                    )
+                });
+                res.send(responseData);
             })
         });
     }
