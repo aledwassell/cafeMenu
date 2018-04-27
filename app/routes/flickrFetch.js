@@ -49,7 +49,7 @@ module.exports = (router) => {
                     res.send(`There was an error ${err}`)
                     return false;
                 }
-                console.log(results.photoset.photo)
+
                 let responseData = {};
 
                 responseData.id = results.photoset.id;

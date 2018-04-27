@@ -1,4 +1,8 @@
+html {
+  height: 100%; }
+
 body {
+  height: 100%;
   margin: 0px; }
 
 .wrapper-container {
@@ -41,6 +45,10 @@ body {
     .nav div:hover {
       -webkit-flex-basis: 35vw;
       flex-basis: 30vw; }
+  .nav .main-content {
+    width: 100%;
+    height: 100%;
+    background-color: pink; }
   .nav .breakfast {
     background-color: #1fadce; }
   .nav .lunch {
