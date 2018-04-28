@@ -8,15 +8,15 @@
                 })
                 .when('/breakfast', {
                     controller: "breakfastCtrl",
-                    templateUrl: "views/breakfast.htm"
+                    templateUrl: "views/menu.htm"
                 })
                 .when('/lunch', {
                     controller: "lunchCtrl",
-                    templateUrl: "views/lunch.htm"
+                    templateUrl: "views/menu.htm"
                 })
                 .when('/dinner', {
                     controller: "dinnerCtrl",
-                    templateUrl: "views/dinner.htm"
+                    templateUrl: "views/menu.htm"
                 })
                 .when('/blog', {
                     controller: "blogCtrl",
@@ -44,11 +44,7 @@
                 }
             ];
             this.getUrls = (setName = []) => {
-                if(setName.length === 3) {
-                    return setName.forEach((i) => {
-                        flickrSetsProvider.save(this.setIds.find(item => item.name === i))
-                    })
-                } else if (setName.length === 1) {
+                if (setName.length === 1) {
                     return flickrSetsProvider.save(this.setIds.find(item => item.name === setName[0]));
                 }
             };
@@ -64,15 +60,13 @@
         }])
 
         .controller('breakfastCtrl', ['$scope', 'setOrganiser', function ($scope, setOrganiser) {
-            $scope.service = setOrganiser;
-            $scope.set = $scope.service.getUrls(['breakfast']);
-            console.log($scope.set);
+            $scope.set = setOrganiser.getUrls(['breakfast']);
         }])
         .controller('lunchCtrl', ['$scope', 'setOrganiser', function ($scope, setOrganiser) {
-            $scope.setConfig = setOrganiser.getUrls(['lunch']);
+            $scope.set = setOrganiser.getUrls(['lunch']);
         }])
         .controller('dinnerCtrl', ['$scope', 'setOrganiser', function ($scope, setOrganiser) {
-            $scope.setConfig = setOrganiser.getUrls('dinner');
+            $scope.set = setOrganiser.getUrls(['dinner']);
         }])
         .controller('blogCtrl', ['$scope', function ($scope) {
         }])

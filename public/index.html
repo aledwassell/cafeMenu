@@ -2,7 +2,8 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Promises</title>
+    <title>Nats が Eats</title>
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <script type="text/javascript" src="components/angular/angular.js"></script>
     <script type="text/javascript" src="components/angular-resource/angular-resource.js"></script>
@@ -14,24 +15,22 @@
 
 <div class="wrapper-container" ng-app="toybox_app">
     <header class="header">
-        <div></div>
-        <div class="b f3 f-headline-ns db tc link helvetica">Nat's
-            <div style="display: inline; background-color: #000000; border-radius: 50%; color: #fff; padding: 10px 15px; font-size: 38px;">が</div>
+        <div class="b f3 f-headline-ns db tc link">Nat's
+            <div style="display: inline; position: relative; top: -10px; background-color: #000000; border-radius: 50%; color: #fff; padding: 10px 15px; font-size: 38px;">が</div>
             eats</div>
     </header>
     <nav ng-controller="navigationCtrl" class="nav">
         <div ng-repeat="link in links" ng-style="{'background-image': 'url(' + link.backgroundUrl + ')'}" class="link gray f6 f5-ns dib {{link.class}}">
-            <a class="link" href="{{link.url}}" title="{{link.name}}">
-                <h2>
+            <a ng-click="showImages()" class="link" href="{{link.url}}" title="{{link.name}}">
+                <h2 class="f3">
                     {{link.name}}
                 </h2>
-                <main ng-view class="main-content"></main>
             </a>
         </div>
         <base href="/">
     </nav>
 
-    <footer></footer>
+    <main ng-view class="main-content"></main>
 </div>
 
 <script type="text/javascript" src="js/angApp.js"></script>
