@@ -52,7 +52,7 @@
 
         .controller('navigationCtrl', ['$scope', '$q', 'setOrganiser', function ($scope, $q, setOrganiser) {
             $scope.breakfastBackground = setOrganiser.getUrls(['breakfast']);
-            $scope.lunchBackground = setOrganiser.getUrls(['lunch']);
+            $scope.lunchBackground = setOrganiser.getUrls(['dinner']);
             $scope.dinnerBackground = setOrganiser.getUrls(['dinner']);
             $q.all([
                 $scope.breakfastBackground.$promise,
