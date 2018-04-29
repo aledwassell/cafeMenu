@@ -20,7 +20,7 @@
             eats</div>
     </header>
     <nav ng-controller="navigationCtrl" class="nav">
-        <div ng-repeat="link in links" ng-style="{'background-image': 'url(' + link.backgroundUrl + ')'}" class="link gray f6 f5-ns dib {{link.class}}">
+        <div ng-repeat="link in links" ng-style="{'background-image': 'url(' + link.background + ')'}" class="link gray f6 f5-ns dib {{link.class}}">
             <a ng-click="showImages()" class="link" href="{{link.url}}" title="{{link.name}}">
                 <h2 class="f3 helvetica">
                     {{link.name}}

@@ -32,15 +32,15 @@
             this.setIds = [
                 {
                     name: 'breakfast',
-                    id: '72157663434459275'
+                    id: '72157690477770340'
                 },
                 {
                     name: 'lunch',
-                    id: '72157662802940420'
+                    id: '72157695562701554'
                 },
                 {
                     name: 'dinner',
-                    id: '72157641632780075'
+                    id: '72157690477773410'
                 }
             ];
             this.getUrls = (setName = []) => {
@@ -50,13 +50,23 @@
             };
         }])
 
-        .controller('navigationCtrl', ['$scope', function ($scope) {
-            $scope.links = [
-                {url: 'breakfast', name: 'Breakfast', class:'breakfast', ctrl: 'breakfastCtrl', backgroundUrl: ''},
-                {url: 'lunch', name: 'Lunch', class:'lunch', ctrl: 'lunchCtrl', backgroundUrl: ''},
-                {url: 'dinner', name: 'Dinner', class:'dinner', ctrl: 'dinnerCtrl', backgroundUrl: ''},
-                {url: 'blog', name: 'Blog', class:'blog', ctrl: 'blogCtrl'}
-            ];
+        .controller('navigationCtrl', ['$scope', '$q', 'setOrganiser', function ($scope, $q, setOrganiser) {
+            $scope.breakfastBackground = setOrganiser.getUrls(['breakfast']);
+            $scope.lunchBackground = setOrganiser.getUrls(['lunch']);
+            $scope.dinnerBackground = setOrganiser.getUrls(['dinner']);
+            $q.all([
+                $scope.breakfastBackground.$promise,
+                $scope.lunchBackground.$promise,
+                $scope.dinnerBackground.$promise
+            ]).then(function() {
+                $scope.links = [
+                    {url: 'breakfast', name: 'Breakfast', class:'breakfast', ctrl: 'breakfastCtrl', background: $scope.breakfastBackground.photoset.photo["0"].url_m},
+                    {url: 'lunch', name: 'Lunch', class:'lunch', ctrl: 'lunchCtrl', background: $scope.lunchBackground.photoset.photo["0"].url_m},
+                    {url: 'dinner', name: 'Dinner', class:'dinner', ctrl: 'dinnerCtrl', background: $scope.dinnerBackground.photoset.photo["0"].url_m},
+                    {url: 'blog', name: 'Blog', class:'blog', ctrl: 'blogCtrl'}
+                ];
+            });
+
         }])
 
         .controller('breakfastCtrl', ['$scope', 'setOrganiser', function ($scope, setOrganiser) {
