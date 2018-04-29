@@ -35,7 +35,28 @@ module.exports = (router) => {
     router.get('/photos', jsonParser, (req, res) => {
         getPhoto(req, res)
     })
+    const getSetList = (req, res) => {
+        let id = req.body.id;
+        console.log(req.body);
+        Flickr.tokenOnly(flickrOptions, function(error, flickr) {
+            flickr.photosets.getList({
+                photoset_id: id,
+                user_id: flickr.options.user_id,
+                page: 1,
+                per_page: 20
+                // primary_photo_extras: 'license, date_upload, date_taken, owner_name, icon_server, original_format, last_update, geo, tags, machine_tags, o_dims, views, media, path_alias, url_sq, url_t, url_s, url_m, url_o'
+            }, function(err, results) {
+                if(err){
+                    res.send(`There was an error ${err}`)
+                    return false;
+                }
+            })
+            console.log(results)
+        });
+    }
+
     const getPhotoSets = (req, res) => {
+        getSetList(req, res);
         let id = req.body.id;
         console.log(req.body);
         Flickr.tokenOnly(flickrOptions, function(error, flickr) {
@@ -43,7 +64,8 @@ module.exports = (router) => {
                 photoset_id: id,
                 user_id: flickr.options.user_id,
                 page: 1,
-                per_page: 20
+                per_page: 20,
+                extras: 'license, date_upload, date_taken, owner_name, icon_server, original_format, last_update, geo, tags, machine_tags, o_dims, views, media, path_alias, url_sq, url_t, url_s, url_m, url_o'
             }, function(err, results) {
                 if(err){
                     res.send(`There was an error ${err}`)
@@ -69,6 +91,6 @@ module.exports = (router) => {
         });
     }
     router.post('/sets', jsonParser, (req, res) => {
-        getPhotoSets(req, res)
+        getPhotoSets(req, res);
     })
 }
