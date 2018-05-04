@@ -51,6 +51,11 @@
         }])
 
         .controller('navigationCtrl', ['$scope', '$q', 'setOrganiser', function ($scope, $q, setOrganiser) {
+
+            $scope.showImages = function ($index) {
+                $scope.selectedIndex = $index;
+            }
+
             $scope.breakfastBackground = setOrganiser.getUrls(['breakfast']);
             $scope.lunchBackground = setOrganiser.getUrls(['dinner']);
             $scope.dinnerBackground = setOrganiser.getUrls(['dinner']);
@@ -60,10 +65,10 @@
                 $scope.dinnerBackground.$promise
             ]).then(function() {
                 $scope.links = [
-                    {url: 'breakfast', name: 'Breakfast', class:'breakfast', ctrl: 'breakfastCtrl', background: $scope.breakfastBackground.photoset.photo["0"].url_m},
-                    {url: 'lunch', name: 'Lunch', class:'lunch', ctrl: 'lunchCtrl', background: $scope.lunchBackground.photoset.photo["0"].url_m},
-                    {url: 'dinner', name: 'Dinner', class:'dinner', ctrl: 'dinnerCtrl', background: $scope.dinnerBackground.photoset.photo["0"].url_m},
-                    {url: 'blog', name: 'Blog', class:'blog', ctrl: 'blogCtrl'}
+                    {id: 1, url: 'breakfast', name: 'Breakfast', class:'breakfast', ctrl: 'breakfastCtrl', background: $scope.breakfastBackground.photoset.photo["0"].url_m},
+                    {id: 2, url: 'lunch', name: 'Lunch', class:'lunch', ctrl: 'lunchCtrl', background: $scope.lunchBackground.photoset.photo["0"].url_m},
+                    {id: 3, url: 'dinner', name: 'Dinner', class:'dinner', ctrl: 'dinnerCtrl', background: $scope.dinnerBackground.photoset.photo["0"].url_m},
+                    {id: 4, url: 'blog', name: 'Blog', class:'blog', ctrl: 'blogCtrl'}
                 ];
             });
 

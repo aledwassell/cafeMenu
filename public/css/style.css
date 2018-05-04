@@ -24,7 +24,8 @@ a:hover, a:active, a:focus {
   align-items: center;
   justify-content: center;
   color: #fff;
-  font-family: 'Playfair Display', serif; }
+  font-family: 'Playfair Display', serif;
+  font-style: italic; }
 
 .nav {
   grid-row: 1/4;
@@ -34,6 +35,7 @@ a:hover, a:active, a:focus {
   justify-content: space-around;
   height: 100%; }
   .nav div {
+    overflow: hidden;
     display: grid;
     background-repeat: no-repeat;
     background-size: cover;
@@ -47,6 +49,14 @@ a:hover, a:active, a:focus {
     cursor: pointer;
     margin: 0 2px 0 2px;
     outline: 0; }
+    .nav div .img {
+      display: none; }
+    .nav div .img.top {
+      align-self: flex-start;
+      grid-row: 1/2; }
+    .nav div .img.bottom {
+      align-self: flex-end;
+      grid-row: 3/4; }
     .nav div a {
       width: 100%;
       height: 100%;
@@ -56,6 +66,8 @@ a:hover, a:active, a:focus {
       -webkit-flex-basis: 35vw;
       flex-basis: 30vw;
       outline: 0; }
+      .nav div:hover .img {
+        display: inline-block; }
   .nav .breakfast {
     background-color: #1fadce; }
   .nav .lunch {
@@ -72,12 +84,8 @@ a:hover, a:active, a:focus {
   width: 100%;
   height: 100%; }
   .main-content .menu-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 5fr 1fr; }
+    width: 100%; }
     .main-content .menu-wrapper .inner-content {
-      background-color: #fff;
-      border-radius: 25px;
-      grid-column: 2/3;
       display: grid;
       grid-template-columns: 1fr 1fr;
       padding: 20px;
