@@ -21,13 +21,13 @@
     </header>
     <nav ng-controller="navigationCtrl" class="nav">
         <div ng-repeat="link in links" class="link gray f6 f5-ns dib {{link.class}}">
-            <img class="img top" src="http://www.pngpix.com/wp-content/uploads/2016/03/Fruits-And-Vegetables-PNG-Image.png" alt="veg">
+            <div class="img top"></div>
             <a ng-click="showImages($index)" href="{{link.url}}" title="{{link.name}}">
                 <h2 class="f3 helvetica">
                     {{link.name}}
                 </h2>
             </a>
-            <img class="img bottom" src="http://www.pngpix.com/wp-content/uploads/2016/08/PNGPIX-COM-Food-Plate-PNG-Transparent-Image.png" alt="food">
+            <div class="img bottom"></div>
         </div>
         <base href="/">
     </nav>

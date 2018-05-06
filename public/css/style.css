@@ -34,52 +34,49 @@ a:hover, a:active, a:focus {
   display: flex;
   justify-content: space-around;
   height: 100%; }
-  .nav div {
+  .nav > div {
     overflow: hidden;
     display: grid;
     background-repeat: no-repeat;
     background-size: cover;
     grid-template-rows: 250px 70px 1fr;
     text-align: center;
-    -webkit-flex-basis: 25vw;
-    flex-basis: 25vw;
-    -webkit-transition: -webkit-flex-basis 2s;
-    transition: flex-basis 2s;
+    flex: 1;
+    transition: flex 2s;
     transition-timing-function: ease;
     cursor: pointer;
-    margin: 0 2px 0 2px;
+    border-left: 2px solid #fff;
+    border-right: 2px solid #fff;
     outline: 0; }
-    .nav div .img {
-      display: none; }
-    .nav div .img.top {
+    .nav > div .img {
+      display: none;
+      height: 100%; }
+    .nav > div .img.top {
+      background: url("/images/veg.png") 50% -250px/150% auto no-repeat;
+      -webkit-transition: background 2s ease;
+      transition: background 2s ease;
       align-self: flex-start;
-      grid-row: 1/2;
-      position: absolute;
-      top: -75px;
-      width: 300px;
-      transition: top 0.5s ease; }
-    .nav div .img.bottom {
+      grid-row: 1/2; }
+    .nav > div .img.bottom {
+      background: url("/images/food.png") 50% 250px/150% auto no-repeat;
+      -webkit-transition: background 2s ease;
+      transition: background 2s ease;
       align-self: flex-end;
-      position: absolute;
-      bottom: -75px;
-      transition: position 0.5s ease;
-      width: 300px;
       grid-row: 3/4; }
-    .nav div a {
+    .nav > div a {
       width: 100%;
       height: 100%;
       color: #fff;
       grid-row: 2/3; }
-    .nav div:hover {
-      -webkit-flex-basis: 35vw;
-      flex-basis: 30vw;
-      outline: 0; }
-      .nav div:hover .img {
-        display: inline-block; }
-        .nav div:hover .img .top {
-          top: -150px; }
-        .nav div:hover .img .bottom {
-          bottom: -75px; }
+    .nav > div:hover {
+      flex: 1.2; }
+      .nav > div:hover .img {
+        display: flex;
+        flex: 1; }
+      .nav > div:hover .img.top {
+        background-position: 50% -150px; }
+      .nav > div:hover .img.bottom {
+        background-position: 50% 150px; }
   .nav .breakfast {
     background-color: #1fadce; }
   .nav .lunch {
