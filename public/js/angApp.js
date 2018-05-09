@@ -51,7 +51,10 @@
         }])
 
         .controller('navigationCtrl', ['$scope', '$q', 'setOrganiser', function ($scope, $q, setOrganiser) {
-
+            $scope.focused = false;
+            $scope.toggleFocus = function () {
+                $scope.focused = !$scope.focused;
+            }
             //
             // $scope.breakfastBackground = setOrganiser.getUrls(['breakfast']);
             // $scope.lunchBackground = setOrganiser.getUrls(['dinner']);
