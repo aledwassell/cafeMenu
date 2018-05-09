@@ -52,9 +52,6 @@
 
         .controller('navigationCtrl', ['$scope', '$q', 'setOrganiser', function ($scope, $q, setOrganiser) {
 
-            $scope.showImages = function ($index) {
-                $scope.selectedIndex = $index;
-            }
             //
             // $scope.breakfastBackground = setOrganiser.getUrls(['breakfast']);
             // $scope.lunchBackground = setOrganiser.getUrls(['dinner']);

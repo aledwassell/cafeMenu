@@ -21,13 +21,17 @@
     </header>
     <nav ng-controller="navigationCtrl" class="nav">
         <div ng-repeat="link in links" class="link gray f6 f5-ns dib {{link.class}}">
-            <div class="img top"></div>
+            <div class="img top">
+
+            </div>
             <a ng-click="showImages($index)" href="{{link.url}}" title="{{link.name}}">
                 <h2 class="f3 helvetica">
                     {{link.name}}
                 </h2>
             </a>
-            <div class="img bottom"></div>
+            <div class="img bottom">
+
+            </div>
         </div>
         <base href="/">
     </nav>

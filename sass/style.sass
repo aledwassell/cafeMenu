@@ -34,7 +34,6 @@ a:hover, a:active, a:focus
   justify-content: space-around
   height: 100%
   > div
-    overflow: hidden
     display: grid
     background-repeat: no-repeat
     background-size: cover
@@ -48,35 +47,32 @@ a:hover, a:active, a:focus
     border-right: 2px solid #fff
     outline: 0
     .img
-      display: none
-      height: 100%
+      display: flex
     .img.top
-      background: url("/images/veg.png") 50% -250px / 150% auto no-repeat
+      background: url("/images/veg.png") center bottom / 160% auto no-repeat
       -webkit-transition: background 2s ease
       transition: background 2s ease
       align-self: flex-start
       grid-row: 1/2
+      height: 100%
     .img.bottom
-      background: url("/images/food.png") 50% 250px / 150% auto no-repeat
+      height: 50%
+      background: url("/images/food.png") center top / 150% auto no-repeat
       -webkit-transition: background 2s ease
       transition: background 2s ease
       align-self: flex-end
       grid-row: 3/4
     a
-      width: 100%
+      width: auto
       height: 100%
       color: #fff
       grid-row: 2/3
+      text-decoration: none
     &:hover
       flex: 1.2
       .img
         display: flex
         flex: 1
-      .img.top
-          background-position: 50% -150px
-      .img.bottom
-          background-position: 50% 150px
-
 
   .breakfast
     background-color: #1fadce
