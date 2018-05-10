@@ -1,6 +1,6 @@
 (function () {
     'use strict';
-    var toybox_app = angular.module('toybox_app', ['ngResource', 'ngRoute'])
+    let toybox_app = angular.module('toybox_app', ['ngResource', 'ngRoute'])
         .config(function ($routeProvider, $locationProvider) {
             $routeProvider
                 .when('/', {
