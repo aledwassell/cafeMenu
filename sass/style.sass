@@ -9,98 +9,76 @@ a:hover, a:active, a:focus
   cursor: pointer
   text-decoration: none
 
+$grid-template-defs: "[start] auto [one] auto [two] auto [three] auto [end]"
+.food-focus
+  grid-template-rows: 130px 70px 1fr !important
 .wrapper-container
   width: 100%
   height: 100%
   display: grid
-  grid-template-rows: 250px 70px 1fr
-  grid-template-columns: 1fr 1fr 1fr 1fr
+  grid-template-rows: 1fr 70px 1fr
+  grid-template-columns: $grid-template-defs
+  grid-auto-columns: 1fr
   grid-column-gap: 5px
-  grid-template-areas: "header-col-1 header-col-2 header-col-3 header-col-4" "nav-col-1 nav-col-2 nav-col-3 nav-col-4" "main-col-1 main-col-2 main-col-3 main-col-4"
+  grid-template-areas: "col-1 col-2 col-3 col-4" "col-1 col-2 col-3 col-4" "col-1 col-2 col-3 col-4"
+  .header
+    grid-row: 1/2
+    grid-column: 1/5
+    display: flex
+    z-index: 2
+    align-items: center
+    justify-content: center
+    color: #fff
+    font-family: 'Playfair Display', serif
+    font-style: italic
 
-.header
-  grid-row: 1/2
-  grid-column: 1/5
-  z-index: 2
-  display: flex
-  align-items: center
-  justify-content: center
-  color: #fff
-  font-family: 'Playfair Display', serif
-  font-style: italic
+  .top
+    -webkit-transition: background 2s ease
+    transition: background 2s ease
+    align-self: flex-start
+    grid-row: 1/2
+    z-index: 1
+    height: 100%
 
-.nav
-  grid-row: 2/3
-  grid-column: 1/5
-  z-index: 1
-  display: flex
-  justify-content: space-around
-  height: 100%
-  > div
-    background-repeat: no-repeat
-    background-size: cover
-    text-align: center
-    flex: 1
-    transition: flex 2s
-    transition-timing-function: ease
-    cursor: pointer
-    outline: 0
-    .img
-      display: none
-    .img.top
-      background: url("/images/veg.png") center bottom / 160% auto no-repeat
-      -webkit-transition: background 2s ease
-      transition: background 2s ease
-      align-self: flex-start
-      grid-row: 1/2
-      height: 100%
-    .img.bottom
-      height: 50%
-      background: url("/images/food.png") center top / 150% auto no-repeat
-      -webkit-transition: background 2s ease
-      transition: background 2s ease
-      align-self: flex-end
-      grid-row: 3/4
-    a
-      width: auto
-      height: 100%
-      color: #fff
-      grid-row: 2/3
-      text-decoration: none
+  .bottom
+    height: 100%
+    -webkit-transition: background 2s ease
+    transition: background 2s ease
+    align-self: flex-end
+    grid-row: 3/4
+    background: center 300% / 150% auto no-repeat
     &:hover
-      flex: 1.2
-      .img
-        display: flex
-        flex: 1
+      background: url("/images/food.png") center bottom / 150% auto no-repeat
+  a
+    width: inherit
+    height: 100%
+    cursor: pointer
+    color: #fff
+    grid-row: 2/3
+    text-decoration: none
 
   .breakfast
-    background-color: #1fadce
-    grid-area: header-col-1
+    background-color: #1fadce !important
+    grid-column: 1/2
   .lunch
-    background-color: #ffb23a
+    background-color: #ffb23a !important
+    grid-column: 2/3
   .dinner
-    background-color: #3ebc8e
+    background-color: #3ebc8e !important
+    grid-column: 3/4
   .blog
-    background-color: #ff4848
+    background-color: #ff4848 !important
+    grid-column: 4/5
 
-.main-content
-  grid-column: 1/2
-  grid-row: 3/4
-  z-index: 2
-  width: 100%
-  height: 100%
-
-  .menu-wrapper
+  .main-content
+    display: grid
+    grid-template-columns: 1fr 2fr
+    grid-column: 1/5
+    grid-row: 3/4
+    z-index: 10
     width: 100%
-    .inner-content
-      display: grid
-      grid-template-columns: 1fr 1fr
-      padding: 20px
-      border-bottom: 1px solid #cccccc
-      img
-        grid-column: 2/3
-        justify-self: center
-        align-self: center
+    height: 100%
+    .content
+      background-color: yellow
 
-.food-focus
-  grid-template-rows: 120px 70px 1fr
+

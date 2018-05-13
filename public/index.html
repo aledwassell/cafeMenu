@@ -10,47 +10,32 @@
     <script type="text/javascript" src="components/angular-route/angular-route.min.js"></script>
     <link rel="stylesheet" href="components/tachyons/css/tachyons.css">
     <link rel="stylesheet" href="components/Font-Awesome/web-fonts-with-css/css/fontawesome-all.css">
+    <script src="components/angular-touch/angular-touch.js"></script>
+    <script src="components/angular-carousel/dist/angular-carousel.js"></script>
+    <link href="components/angular-carousel/dist/angular-carousel.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-
+<base href="/">
 <div class="wrapper-container" ng-app="toybox_app" ng-controller="navigationCtrl">
     <header class="header">
         <div class="b f3 f-headline-ns db tc link">Nat's
             <div style="display: inline; position: relative; font-style: normal; top: -10px; background-color: #fff; border-radius: 50%; color: #444; padding: 10px 15px; font-size: 38px;">が</div>
             eats</div>
     </header>
-    <nav class="nav">
-        <div ng-repeat="link in links" class="link gray f6 f5-ns dib {{link.class}}" ng-class="{ 'food-focus': focused}">
-            <div class="img top">
-            </div>
-            <a ng-click="toggleFocus()" href="{{link.url}}" title="{{link.name}}">
-                <h2 class="f3 helvetica">
-                    {{link.name}}
-                </h2>
-            </a>
-            <div class="img bottom">
 
-            </div>
-        </div>
-        <base href="/">
-    </nav>
+    <div ng-repeat="link in links" class="top {{link.class}}">
+    </div>
+
+    <a ng-repeat="link in links" class="{{link.class}}" ng-click="toggleFocus()" href="{{link.url}}" title="{{link.name}}">
+        <h2 class="f3 helvetica tc">
+            {{link.name}}
+        </h2>
+    </a>
+
+    <div ng-repeat="link in links" class="bottom {{link.class}}">
+    </div>
 
     <main ng-view class="main-content"></main>
-</div>
-
-<div class="grid-div food-focus">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div class="pink"></div>
 </div>
 <script type="text/javascript" src="js/angApp.js"></script>
 </body>
