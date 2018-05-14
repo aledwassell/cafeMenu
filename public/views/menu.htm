@@ -1,8 +1,15 @@
-<div class="content" ng-repeat="pic in set.photoset.photo">
-    <div>
-        <h4>{{pic.title}}</h4>
-        <h5>{{pic.description._content}}</h5>
-    </div>
-    <img src="{{pic.url_m}}" alt="{{pic.title}}" class="db">
+<div class="content">
+    <!--<div>-->
+        <!--<h4>{{pic.title}}</h4>-->
+        <!--<h5>{{pic.description._content}}</h5>-->
+    <!--</div>-->
+    <ul rn-carousel class="image">
+        <li ng-repeat="pic in set.photoset.photo">
+            <div class="layer">
+                <img src="{{pic.url_m}}" alt="{{pic.title}}" class="db">
+            </div>
+        </li>
+    </ul>
+    <!--<img src="{{pic.url_m}}" alt="{{pic.title}}" class="db">-->
 </div>
 

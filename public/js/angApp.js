@@ -1,6 +1,6 @@
 (function () {
     'use strict';
-    let toybox_app = angular.module('toybox_app', ['ngResource', 'ngRoute'])
+    let toybox_app = angular.module('toybox_app', ['ngResource', 'ngRoute', 'angular-carousel'])
         .config(function ($routeProvider, $locationProvider) {
             $routeProvider
                 .when('/', {
